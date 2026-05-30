@@ -1,0 +1,18 @@
+{
+  // mdformat と衝突しない最小構成。
+  // mdformat が整形した結果を破壊しない範囲で構造系ルールを残す。
+  "config": {
+    "default": true,
+    // 日本語混じりの文章は文字幅で折り返せないため line-length は無効化。
+    "MD013": false,
+    // mdformat は同一見出しを許容するため、整形結果と一致させる。
+    "MD024": { "siblings_only": true }
+  },
+  "globs": ["**/*.md"],
+  "ignores": [
+    ".venv/**",
+    "node_modules/**",
+    ".git/**",
+    ".claude/**"
+  ]
+}

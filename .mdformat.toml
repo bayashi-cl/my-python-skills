@@ -1,0 +1,5 @@
+# mdformat は既存改行を尊重する設定にする。
+# 日本語の文章を勝手に詰めたり折り返したりされないように wrap=keep。
+wrap = "keep"
+number = false
+end_of_line = "lf"
