@@ -6,7 +6,7 @@
 
 スキルは [Agent Skills 仕様](https://cli.github.com/manual/gh_skill_install) に従い、`gh skill install` でインストールされる前提:
 
-```
+```bash
 gh skill install bayashi-cl/my-python-skills <skill-name>
 ```
 
@@ -15,9 +15,9 @@ gh skill install bayashi-cl/my-python-skills <skill-name>
 ## スキルを追加するとき
 
 1. `skills/<kebab-case-name>/SKILL.md` を作る (1 スキル = 1 ディレクトリ)。
-2. frontmatter 必須項目: `name` (ディレクトリ名と一致) と `description` (エージェントがスキル選択に使う一文 — *いつ* 起動すべきかが分かる粒度で書く)。
-3. 本文は対象エージェントへの指示として書く。「Python プロジェクトを書く」という用途に閉じているので、汎用的な Python の作法ではなく、このスキルが解決する特定のタスク (例: パッケージ初期化、テスト雛形、特定ライブラリの使い方) にスコープを絞る。
-4. スキルが参照するテンプレートやスクリプトは同じディレクトリ配下に置く。
+1. frontmatter 必須項目: `name` (ディレクトリ名と一致) と `description` (エージェントがスキル選択に使う一文 — *いつ* 起動すべきかが分かる粒度で書く)。
+1. 本文は対象エージェントへの指示として書く。「Python プロジェクトを書く」という用途に閉じているので、汎用的な Python の作法ではなく、このスキルが解決する特定のタスク (例: パッケージ初期化、テスト雛形、特定ライブラリの使い方) にスコープを絞る。
+1. スキルが参照するテンプレートやスクリプトは同じディレクトリ配下に置く。
 
 ## このリポジトリで *やらない* こと
 

@@ -15,44 +15,45 @@ description: Python プロジェクトに lint / formatter を導入する、ま
 ## 導入手順
 
 1. `uv add --dev ruff`
-2. `pyproject.toml` に以下を追記:
 
-```toml
-[tool.ruff]
-line-length = 100
-target-version = "py312"
-src = ["src", "tests"]
+1. `pyproject.toml` に以下を追記:
 
-[tool.ruff.lint]
-select = [
-    "E", "F", "W",    # pycodestyle / pyflakes
-    "I",              # isort
-    "B",              # bugbear
-    "UP",             # pyupgrade
-    "SIM",            # simplify
-    "RUF",            # ruff 固有
-    "N",              # pep8-naming
-    "PTH",            # pathlib 化
-    "TCH",            # type-checking import 分離
-    "PL",             # pylint subset
-]
-ignore = [
-    "E501",    # line-too-long は formatter に任せる
-    "PLR0913", # 引数多すぎは API 設計上必要なケースがある
-]
+   ```toml
+   [tool.ruff]
+   line-length = 100
+   target-version = "py312"
+   src = ["src", "tests"]
 
-[tool.ruff.lint.per-file-ignores]
-"tests/**" = ["S101", "PLR2004"]  # assert と magic number を許可
-"__init__.py" = ["F401"]          # re-export を許可
+   [tool.ruff.lint]
+   select = [
+       "E", "F", "W",    # pycodestyle / pyflakes
+       "I",              # isort
+       "B",              # bugbear
+       "UP",             # pyupgrade
+       "SIM",            # simplify
+       "RUF",            # ruff 固有
+       "N",              # pep8-naming
+       "PTH",            # pathlib 化
+       "TCH",            # type-checking import 分離
+       "PL",             # pylint subset
+   ]
+   ignore = [
+       "E501",    # line-too-long は formatter に任せる
+       "PLR0913", # 引数多すぎは API 設計上必要なケースがある
+   ]
 
-[tool.ruff.lint.isort]
-known-first-party = ["<package_name>"]
+   [tool.ruff.lint.per-file-ignores]
+   "tests/**" = ["S101", "PLR2004"]  # assert と magic number を許可
+   "__init__.py" = ["F401"]          # re-export を許可
 
-[tool.ruff.format]
-docstring-code-format = true
-```
+   [tool.ruff.lint.isort]
+   known-first-party = ["<package_name>"]
 
-3. `uv run ruff check --fix` と `uv run ruff format` を実行し、**初期適用差分を 1 コミットにまとめる** (混在すると以降のレビューが死ぬ)。
+   [tool.ruff.format]
+   docstring-code-format = true
+   ```
+
+1. `uv run ruff check --fix` と `uv run ruff format` を実行し、**初期適用差分を 1 コミットにまとめる** (混在すると以降のレビューが死ぬ)。
 
 ## ルール選定の指針
 

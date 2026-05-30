@@ -49,13 +49,13 @@ class User(BaseModel):
 
 ## model_config の基準
 
-| 設定 | 既定 | 理由 |
-| --- | --- | --- |
-| `frozen=True` | 採用 | 不変にして共有しても安全に。書き換えが必要なら `model_copy(update=...)` |
-| `extra="forbid"` | 採用 | 未知のキーで silent に取りこぼすのを防ぐ |
-| `str_strip_whitespace=True` | 採用 | API 入力の前後空白を吸収 |
-| `populate_by_name=True` | 採用 | エイリアス + 属性名どちらでも組み立て可能に |
-| `validate_assignment=True` | 必要時のみ | frozen と排他。frozen を優先 |
+| 設定                        | 既定       | 理由                                                                    |
+| --------------------------- | ---------- | ----------------------------------------------------------------------- |
+| `frozen=True`               | 採用       | 不変にして共有しても安全に。書き換えが必要なら `model_copy(update=...)` |
+| `extra="forbid"`            | 採用       | 未知のキーで silent に取りこぼすのを防ぐ                                |
+| `str_strip_whitespace=True` | 採用       | API 入力の前後空白を吸収                                                |
+| `populate_by_name=True`     | 採用       | エイリアス + 属性名どちらでも組み立て可能に                             |
+| `validate_assignment=True`  | 必要時のみ | frozen と排他。frozen を優先                                            |
 
 ## バリデータ
 

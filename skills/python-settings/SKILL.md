@@ -15,56 +15,57 @@ description: Python アプリケーションの設定 (環境変数 / .env / 階
 ## 導入
 
 1. `uv add pydantic-settings`
-2. `src/<package>/config.py` を作る:
 
-```python
-from __future__ import annotations
+1. `src/<package>/config.py` を作る:
 
-from functools import lru_cache
-from pathlib import Path
+   ```python
+   from __future__ import annotations
 
-from pydantic import Field, SecretStr
-from pydantic_settings import BaseSettings, SettingsConfigDict
+   from functools import lru_cache
+   from pathlib import Path
 
-
-class DatabaseSettings(BaseSettings):
-    url: str
-    pool_size: int = 5
+   from pydantic import Field, SecretStr
+   from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
-class Settings(BaseSettings):
-    model_config = SettingsConfigDict(
-        env_file=".env",
-        env_file_encoding="utf-8",
-        env_prefix="MYAPP_",
-        env_nested_delimiter="__",
-        extra="forbid",
-        frozen=True,
-    )
-
-    debug: bool = False
-    log_level: str = "INFO"
-    api_key: SecretStr
-    database: DatabaseSettings = Field(default_factory=DatabaseSettings)
-    data_dir: Path = Path("./data")
+   class DatabaseSettings(BaseSettings):
+       url: str
+       pool_size: int = 5
 
 
-@lru_cache(maxsize=1)
-def get_settings() -> Settings:
-    return Settings()  # type: ignore[call-arg]   # env から埋まる
+   class Settings(BaseSettings):
+       model_config = SettingsConfigDict(
+           env_file=".env",
+           env_file_encoding="utf-8",
+           env_prefix="MYAPP_",
+           env_nested_delimiter="__",
+           extra="forbid",
+           frozen=True,
+       )
+
+       debug: bool = False
+       log_level: str = "INFO"
+       api_key: SecretStr
+       database: DatabaseSettings = Field(default_factory=DatabaseSettings)
+       data_dir: Path = Path("./data")
 
 
-settings = get_settings()
-```
+   @lru_cache(maxsize=1)
+   def get_settings() -> Settings:
+       return Settings()  # type: ignore[call-arg]   # env から埋まる
 
-3. `.env.example`:
 
-```
-MYAPP_API_KEY=sk-xxx
-MYAPP_DATABASE__URL=postgresql+psycopg://user:pass@localhost/app
-MYAPP_DATABASE__POOL_SIZE=10
-MYAPP_DEBUG=false
-```
+   settings = get_settings()
+   ```
+
+1. `.env.example`:
+
+   ```dotenv
+   MYAPP_API_KEY=sk-xxx
+   MYAPP_DATABASE__URL=postgresql+psycopg://user:pass@localhost/app
+   MYAPP_DATABASE__POOL_SIZE=10
+   MYAPP_DEBUG=false
+   ```
 
 ## 設計の指針
 

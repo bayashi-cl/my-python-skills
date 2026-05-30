@@ -21,7 +21,7 @@ description: Python プロジェクトでテストを書く・整備するとき
 
 ## ディレクトリ構成
 
-```
+```text
 tests/
 ├── __init__.py
 ├── conftest.py              # プロジェクト全体の fixture
@@ -37,42 +37,44 @@ tests/
 ## 導入手順
 
 1. `uv add --dev pytest pytest-cov pytest-mock`
-2. `pyproject.toml`:
 
-```toml
-[tool.pytest.ini_options]
-minversion = "8.0"
-testpaths = ["tests"]
-addopts = [
-    "-ra",
-    "--strict-markers",
-    "--strict-config",
-    "-m", "not integration",   # デフォルトは単体のみ
-]
-markers = [
-    "integration: 外部依存を伴うテスト",
-    "slow: 実行に時間がかかるテスト",
-]
-filterwarnings = [
-    "error",                     # 警告はテスト失敗に昇格
-    "ignore::DeprecationWarning:<外部ライブラリ名>",
-]
+1. `pyproject.toml`:
 
-[tool.coverage.run]
-source = ["src"]
-branch = true
+   ```toml
+   [tool.pytest.ini_options]
+   minversion = "8.0"
+   testpaths = ["tests"]
+   addopts = [
+       "-ra",
+       "--strict-markers",
+       "--strict-config",
+       "-m", "not integration",   # デフォルトは単体のみ
+   ]
+   markers = [
+       "integration: 外部依存を伴うテスト",
+       "slow: 実行に時間がかかるテスト",
+   ]
+   filterwarnings = [
+       "error",                     # 警告はテスト失敗に昇格
+       "ignore::DeprecationWarning:<外部ライブラリ名>",
+   ]
 
-[tool.coverage.report]
-show_missing = true
-skip_covered = true
-exclude_also = [
-    "if TYPE_CHECKING:",
-    "raise NotImplementedError",
-    "\\.\\.\\.",
-]
-```
+   [tool.coverage.run]
+   source = ["src"]
+   branch = true
 
-3. 実行:
+   [tool.coverage.report]
+   show_missing = true
+   skip_covered = true
+   exclude_also = [
+       "if TYPE_CHECKING:",
+       "raise NotImplementedError",
+       "\\.\\.\\.",
+   ]
+   ```
+
+1. 実行:
+
    - 単体: `uv run pytest`
    - 全部: `uv run pytest -m ""`
    - カバレッジ: `uv run pytest --cov --cov-report=term-missing`

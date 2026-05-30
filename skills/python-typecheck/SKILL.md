@@ -15,21 +15,22 @@ description: Python プロジェクトに静的型チェックを導入する、
 ## pyright の導入
 
 1. `uv add --dev pyright`
-2. `pyproject.toml`:
 
-```toml
-[tool.pyright]
-include = ["src", "tests"]
-pythonVersion = "3.12"
-typeCheckingMode = "strict"
-reportMissingTypeStubs = false
-reportUnknownMemberType = false   # サードパーティ型不足を緩和
-reportUnknownArgumentType = false
-venvPath = "."
-venv = ".venv"
-```
+1. `pyproject.toml`:
 
-3. `uv run pyright` で実行。CI は `pyright --outputjson` を使うと差分集計しやすい。
+   ```toml
+   [tool.pyright]
+   include = ["src", "tests"]
+   pythonVersion = "3.12"
+   typeCheckingMode = "strict"
+   reportMissingTypeStubs = false
+   reportUnknownMemberType = false   # サードパーティ型不足を緩和
+   reportUnknownArgumentType = false
+   venvPath = "."
+   venv = ".venv"
+   ```
+
+1. `uv run pyright` で実行。CI は `pyright --outputjson` を使うと差分集計しやすい。
 
 ## mypy を使う場合
 
@@ -65,8 +66,8 @@ ignore_missing_imports = true
 既存コードに後から strict を入れるとき:
 
 1. `typeCheckingMode = "basic"` で開始し、`src/<core>/**` だけ `strict = true` を `executionEnvironments` で指定する。
-2. CI を `--warnings` で回し、新規エラーゼロを差分基準にする (絶対数は許容)。
-3. 段階的に対象ディレクトリを広げる。
+1. CI を `--warnings` で回し、新規エラーゼロを差分基準にする (絶対数は許容)。
+1. 段階的に対象ディレクトリを広げる。
 
 ## エージェントへの指示
 
