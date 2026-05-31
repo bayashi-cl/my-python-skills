@@ -12,6 +12,10 @@ gh skill install bayashi-cl/my-python-skills <skill-name>
 
 自動検出パターンは `skills/*/SKILL.md`。インストール時にソース追跡用メタデータが frontmatter に注入されるため、こちらで `source:` 等の追跡フィールドを書く必要はない。
 
+## Agent Skillsの仕様
+
+このレポジトリで作成するSkillは<https://agentskills.io>の仕様に従います。
+
 ## スキルを追加するとき
 
 1. `skills/<kebab-case-name>/SKILL.md` を作る (1 スキル = 1 ディレクトリ)。
